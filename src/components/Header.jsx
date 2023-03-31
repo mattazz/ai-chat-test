@@ -5,7 +5,7 @@ function Header(){
         <header>
             <ul className="header-container">
                 <NavLink className="header-menu" to={'/'}><li>Chat</li></NavLink>
-                <NavLink className="header-menu" to={'/help'}><li>Help</li></NavLink>
+                {/* <NavLink className="header-menu" to={'/help'}><li>Help</li></NavLink> */}
             </ul>
 
         </header>

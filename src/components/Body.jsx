@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Configuration, OpenAIApi } from 'openai';
-import { MainLeft, MainRight } from './'
+import { MainLeft, MainRight, Alert } from './'
+
+var api_key = '';
 
 
 
@@ -8,7 +10,33 @@ function Body() {
   const [messages, setMessages] = useState([]);
   const [aiMessages, setAiMessages] = useState([]);
   const [conversation, setConversation] = useState([]);
+  const [key_set, setKeySet] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('')
+  const [alertColor, setAlertColor] = useState('white')
   const chatWindowRef = useRef(null);
+
+  function applyAPI(e) {
+    e.preventDefault();
+    api_key = e.target[0].value;
+    console.log('API: ' + api_key);
+
+    const configuration = new Configuration({
+      apiKey:  api_key,
+    })
+
+    const openai = new OpenAIApi(configuration);
+    const aiResponse = openai.listModels().then((response) => {
+      setKeySet(true);  
+      setAlertMessage('Key set. Ready to go!');
+      setAlertColor('green');
+      document.getElementById('api-button').classList.add('hide')
+      document.getElementById('api-input').classList.add('hide')
+    }).catch((error) => {
+      setKeySet(true);
+      setAlertMessage('Invalid API Key. Please try again.');
+      setAlertColor('red');
+    })
+  }
 
   useEffect(() => {
     chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
@@ -20,9 +48,8 @@ function Body() {
     console.log(messages);
 
     const configuration = new Configuration({
-      apiKey: import.meta.env.VITE_API_KEY,
+      apiKey:  api_key,
     });
-
     const openai = new OpenAIApi(configuration);
     const aiResponse = await openai.createCompletion({
       model: "text-davinci-003",
@@ -41,6 +68,11 @@ function Body() {
   return (
     <div className="main-body">
       <h1 className="chat-heading">AI Chat</h1>
+      <form action="" onSubmit={applyAPI}>
+        <input id='api-input' className='input-box' type="password" placeholder='Input your API Key here' />
+        <button className='send-button' id='api-button'>Submit</button>
+        {key_set ? <Alert alertMessage={alertMessage} color={alertColor} /> : null}
+      </form>
       <div className="chat-window" ref={chatWindowRef}>
         <MainRight userMessages={messages} aiMessages={aiMessages} conversation={conversation} />
       </div>
