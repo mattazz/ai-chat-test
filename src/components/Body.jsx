@@ -7,12 +7,15 @@ var api_key = '';
 
 
 function Body() {
+  // For messaging system
   const [messages, setMessages] = useState([]);
   const [aiMessages, setAiMessages] = useState([]);
   const [conversation, setConversation] = useState([]);
   const [key_set, setKeySet] = useState(false);
+  // For alert
   const [alertMessage, setAlertMessage] = useState('')
   const [alertColor, setAlertColor] = useState('white')
+  // Doesn't work, whatever
   const chatWindowRef = useRef(null);
 
   function applyAPI(e) {
