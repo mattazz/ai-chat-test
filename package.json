@@ -1,11 +1,12 @@
 {
-  "name": "ai-chat-test",
-  "private": true,
-  "version": "0.0.0",
   "homepage": "http://mattazz.github.io/ai-chat-test",
+  "name": "ai-chat-test",
+  "private": false,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build": "vite build",
     "preview": "vite preview"
