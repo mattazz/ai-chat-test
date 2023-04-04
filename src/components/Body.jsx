@@ -25,6 +25,7 @@ function Body() {
 
     const configuration = new Configuration({
       apiKey:  api_key,
+      organization: 'org-YqkSoqf18JKiZxGkdJpc0NSW',
     })
 
     const openai = new OpenAIApi(configuration);
@@ -52,6 +53,7 @@ function Body() {
 
     const configuration = new Configuration({
       apiKey:  api_key,
+      organization: 'org-YqkSoqf18JKiZxGkdJpc0NSW',
     });
     const openai = new OpenAIApi(configuration);
     const aiResponse = await openai.createCompletion({

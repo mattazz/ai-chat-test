@@ -4,8 +4,11 @@
     "dictionaryDefinitions": [],
     "dictionaries": [],
     "words": [
+        "davinci",
         "openai"
     ],
-    "ignoreWords": [],
+    "ignoreWords": [
+        "Soqf"
+    ],
     "import": []
 }
